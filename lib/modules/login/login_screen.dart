@@ -59,7 +59,6 @@ class ShopLoginScreen extends StatelessWidget {
                           SizedBox(height: 15.0),
                           defaultFormField(
                               controller: passwordController,
-
                               onSubmit: (value) {
                                 if (formKey.currentState.validate()) {
                                   ShopLoginCubit.get(context).userLogin(
@@ -76,10 +75,14 @@ class ShopLoginScreen extends StatelessWidget {
                                 }
                               },
                               label: 'Password',
-                              isPassword: true,
+                              isPassword:
+                                  ShopLoginCubit.get(context).isPassword,
                               prefix: Icons.lock_outline,
-                              suffix: Icons.visibility_outlined,
-                              suffixPressed: () {}),
+                              suffix: ShopLoginCubit.get(context).suffix,
+                              suffixPressed: () {
+                                ShopLoginCubit.get(context)
+                                    .changePasswordVisibility();
+                              }),
                           SizedBox(height: 30.0),
                           ConditionalBuilder(
                             condition: state is! ShopLoginLoadingState,

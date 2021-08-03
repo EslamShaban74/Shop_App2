@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/modules/login/cubit/shop_login_states.dart';
 import 'package:shop_app/shared/remote/dio_helper.dart';
@@ -28,5 +29,15 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
       print(error.toString());
       emit(ShopLoginErrorState(error.toString()));
     });
+  }
+
+  IconData suffix = Icons.visibility_outlined;
+  bool isPassword = true;
+
+  void changePasswordVisibility() {
+    isPassword = !isPassword;
+    suffix =
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    emit(ShopLoginChangePasswordVisibilityState());
   }
 }
