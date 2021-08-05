@@ -1,6 +1,7 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/modules/login/cubit/shop_login_cubit.dart';
 import 'package:shop_app/modules/login/cubit/shop_login_states.dart';
 import 'package:shop_app/modules/register/shop_register_screen.dart';
@@ -16,7 +17,32 @@ class ShopLoginScreen extends StatelessWidget {
     return BlocProvider(
         create: (context) => ShopLoginCubit(),
         child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is ShopLoginSuccessState) {
+              if (state.loginModel.status) {
+                print(state.loginModel.data.token);
+                print(state.loginModel.message);
+                Fluttertoast.showToast(
+                    msg: state.loginModel.message,
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 5,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              } else {
+                print(state.loginModel.message);
+                Fluttertoast.showToast(
+                    msg: state.loginModel.message,
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 5,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              }
+            }
+          },
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(),
