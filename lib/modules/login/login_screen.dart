@@ -19,7 +19,9 @@ class ShopLoginScreen extends StatelessWidget {
         child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
           listener: (context, state) {
             if (state is ShopLoginSuccessState) {
+
               if (state.loginModel.status) {
+
                 print(state.loginModel.data.token);
                 print(state.loginModel.message);
                 Fluttertoast.showToast(
@@ -31,6 +33,7 @@ class ShopLoginScreen extends StatelessWidget {
                     textColor: Colors.white,
                     fontSize: 16.0);
               } else {
+
                 print(state.loginModel.message);
                 Fluttertoast.showToast(
                     msg: state.loginModel.message,
@@ -40,7 +43,7 @@ class ShopLoginScreen extends StatelessWidget {
                     backgroundColor: Colors.red,
                     textColor: Colors.white,
                     fontSize: 16.0);
-              }
+             }
             }
           },
           builder: (context, state) {

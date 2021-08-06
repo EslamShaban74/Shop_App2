@@ -28,9 +28,7 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
     ).then((value) {
       print(value.data);
       loginModel = ShopLoginModel.fromJson(value.data);
-      print(loginModel.status);
-      print(loginModel.message);
-      print(loginModel.data.token);
+
       emit(ShopLoginSuccessState(loginModel));
     }).catchError((error) {
       print(error.toString());
@@ -44,7 +42,7 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(ShopLoginChangePasswordVisibilityState());
   }
 }
