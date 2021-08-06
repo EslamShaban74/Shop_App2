@@ -33,7 +33,7 @@ ThemeData lightTheme = ThemeData(
     type: BottomNavigationBarType.fixed,
     backgroundColor: Colors.white,
     elevation: 20.0,
-    selectedItemColor: Colors.deepOrange,
+    selectedItemColor: Colors.blue,
   ),
 );
 
