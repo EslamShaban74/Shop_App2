@@ -91,6 +91,7 @@ class ShopLoginScreen extends StatelessWidget {
                           suffix: ShopLoginCubit.get(context).suffix,
                           onSubmit: (value) {
                             if (formKey.currentState.validate()) {
+                              // FocusScope.of(context).unfocus();
                               ShopLoginCubit.get(context).userLogin(
                                 email: emailController.text,
                                 password: passwordController.text,
@@ -118,6 +119,7 @@ class ShopLoginScreen extends StatelessWidget {
                           builder: (context) => defaultButton(
                             function: () {
                               if (formKey.currentState.validate()) {
+                                // FocusScope.of(context).unfocus();
                                 ShopLoginCubit.get(context).userLogin(
                                   email: emailController.text,
                                   password: passwordController.text,
