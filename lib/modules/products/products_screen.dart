@@ -7,12 +7,19 @@ import 'package:shop_app/layout/shop_layout/cubit/cubit.dart';
 import 'package:shop_app/layout/shop_layout/cubit/states.dart';
 import 'package:shop_app/models/categories_model/categories_model.dart';
 import 'package:shop_app/models/home_model/home_model.dart';
+import 'package:shop_app/shared/component/components.dart';
 
 class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is ShopSuccessChangeFavoritesState) {
+          if (!state.model.status) {
+            showToast(state: ToastStates.ERROR, text: state.model.message);
+          }
+        }
+      },
       builder: (context, state) {
         return ConditionalBuilder(
           condition: ShopCubit.get(context).homeModel != null &&
@@ -231,7 +238,9 @@ class ProductsScreen extends StatelessWidget {
                             size: 14.0,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          ShopCubit.get(context).changeFavorites(model.id);
+                        },
                       ),
                     ],
                   ),
