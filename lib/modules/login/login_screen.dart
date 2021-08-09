@@ -6,6 +6,7 @@ import 'package:shop_app/modules/login/cubit/shop_login_cubit.dart';
 import 'package:shop_app/modules/login/cubit/shop_login_states.dart';
 import 'package:shop_app/modules/register/shop_register_screen.dart';
 import 'package:shop_app/shared/component/components.dart';
+import 'package:shop_app/shared/component/constants.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 class ShopLoginScreen extends StatelessWidget {
@@ -29,6 +30,7 @@ class ShopLoginScreen extends StatelessWidget {
                 key: 'token',
                 value: state.loginModel.data.token,
               ).then((value) {
+                token = state.loginModel.data.token;
                 navigateAndFinish(
                   context,
                   ShopLayout(),
@@ -59,14 +61,14 @@ class ShopLoginScreen extends StatelessWidget {
                         Text(
                           'LOGIN',
                           style: Theme.of(context).textTheme.headline4.copyWith(
-                            color: Colors.black,
-                          ),
+                                color: Colors.black,
+                              ),
                         ),
                         Text(
                           'Login now to browse our hot offers',
                           style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            color: Colors.grey,
-                          ),
+                                color: Colors.grey,
+                              ),
                         ),
                         SizedBox(
                           height: 30.0,

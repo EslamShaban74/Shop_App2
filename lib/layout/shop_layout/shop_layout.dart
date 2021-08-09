@@ -5,6 +5,7 @@ import 'package:shop_app/layout/shop_layout/cubit/states.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/modules/search/search_screen.dart';
 import 'package:shop_app/shared/component/components.dart';
+import 'package:shop_app/shared/component/constants.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 class ShopLayout extends StatelessWidget {
