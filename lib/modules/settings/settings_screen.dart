@@ -23,95 +23,95 @@ class SettingsScreen extends StatelessWidget {
         emailController.text = model.data.email;
         phoneController.text = model.data.phone;
 
-        return ConditionalBuilder(
-          condition: ShopCubit.get(context).loginModel != null,
-          builder: (context) => Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children:
-                [
+        return SingleChildScrollView(
+          child: ConditionalBuilder(
+            condition: ShopCubit.get(context).loginModel != null,
+            builder: (context) => Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    if (state is ShopLoadingUpdateUserDataState)
+                      LinearProgressIndicator(),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    defaultFormField(
+                      controller: nameController,
+                      type: TextInputType.name,
+                      validate: (String value) {
+                        if (value.isEmpty) {
+                          return 'name must not be empty';
+                        }
 
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  defaultFormField(
-                    controller: nameController,
-                    type: TextInputType.name,
-                    validate: (String value) {
-                      if (value.isEmpty) {
-                        return 'name must not be empty';
-                      }
+                        return null;
+                      },
+                      label: 'Name',
+                      prefix: Icons.person,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    defaultFormField(
+                      controller: emailController,
+                      type: TextInputType.emailAddress,
+                      validate: (String value) {
+                        if (value.isEmpty) {
+                          return 'email must not be empty';
+                        }
 
-                      return null;
-                    },
-                    label: 'Name',
-                    prefix: Icons.person,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  defaultFormField(
-                    controller: emailController,
-                    type: TextInputType.emailAddress,
-                    validate: (String value) {
-                      if (value.isEmpty) {
-                        return 'email must not be empty';
-                      }
+                        return null;
+                      },
+                      label: 'Email Address',
+                      prefix: Icons.email,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    defaultFormField(
+                      controller: phoneController,
+                      type: TextInputType.phone,
+                      validate: (String value) {
+                        if (value.isEmpty) {
+                          return 'phone must not be empty';
+                        }
 
-                      return null;
-                    },
-                    label: 'Email Address',
-                    prefix: Icons.email,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  defaultFormField(
-                    controller: phoneController,
-                    type: TextInputType.phone,
-                    validate: (String value) {
-                      if (value.isEmpty) {
-                        return 'phone must not be empty';
-                      }
-
-                      return null;
-                    },
-                    label: 'Phone',
-                    prefix: Icons.phone,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  // defaultButton(
-                  //   function: ()
-                  //   {
-                  //     if(formKey.currentState.validate())
-                  //     {
-                  //       ShopCubit.get(context).updateUserData(
-                  //         name: nameController.text,
-                  //         phone: phoneController.text,
-                  //         email: emailController.text,
-                  //       );
-                  //     }
-                  //   },
-                  //   text: 'update',
-                  // ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  defaultButton(
-                    function: () {
-                      signOut(context);
-                    },
-                    text: 'Logout',
-                  ),
-                ],
+                        return null;
+                      },
+                      label: 'Phone',
+                      prefix: Icons.phone,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    defaultButton(
+                      function: () {
+                        if (formKey.currentState.validate()) {
+                          ShopCubit.get(context).updateUserData(
+                            name: nameController.text,
+                            phone: phoneController.text,
+                            email: emailController.text,
+                          );
+                        }
+                      },
+                      text: 'update',
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    defaultButton(
+                      function: () {
+                        signOut(context);
+                      },
+                      text: 'Logout',
+                    ),
+                  ],
+                ),
               ),
             ),
+            fallback: (context) => Center(child: CircularProgressIndicator()),
           ),
-          fallback: (context) => Center(child: CircularProgressIndicator()),
         );
       },
     );
