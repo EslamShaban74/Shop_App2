@@ -34,6 +34,7 @@ class ShopRegisterScreen extends StatelessWidget {
                 value: state.loginModel.data.token,
               ).then((value) {
                 token = state.loginModel.data.token;
+
                 navigateAndFinish(
                   context,
                   ShopLayout(),
@@ -62,7 +63,7 @@ class ShopRegisterScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Register',
+                          'REGISTER',
                           style: Theme.of(context).textTheme.headline4.copyWith(
                                 color: Colors.black,
                               ),
@@ -73,7 +74,9 @@ class ShopRegisterScreen extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                         ),
-                        const SizedBox(height: 20.0,),
+                        SizedBox(
+                          height: 30.0,
+                        ),
                         defaultFormField(
                           controller: nameController,
                           type: TextInputType.name,
@@ -82,11 +85,11 @@ class ShopRegisterScreen extends StatelessWidget {
                               return 'please enter your name';
                             }
                           },
-                          label: 'Name',
+                          label: 'User Name',
                           prefix: Icons.person,
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 15.0,
                         ),
                         defaultFormField(
                           controller: emailController,
@@ -100,13 +103,13 @@ class ShopRegisterScreen extends StatelessWidget {
                           prefix: Icons.email_outlined,
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 15.0,
                         ),
                         defaultFormField(
                           controller: passwordController,
                           type: TextInputType.visiblePassword,
                           suffix: ShopRegisterCubit.get(context).suffix,
-
+                          onSubmit: (value) {},
                           isPassword: ShopRegisterCubit.get(context).isPassword,
                           suffixPressed: () {
                             ShopRegisterCubit.get(context)
@@ -121,11 +124,11 @@ class ShopRegisterScreen extends StatelessWidget {
                           prefix: Icons.lock_outline,
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 15.0,
                         ),
                         defaultFormField(
                           controller: phoneController,
-                          type: TextInputType.number,
+                          type: TextInputType.phone,
                           validate: (String value) {
                             if (value.isEmpty) {
                               return 'please enter your phone number';
@@ -133,38 +136,30 @@ class ShopRegisterScreen extends StatelessWidget {
                           },
                           label: 'Phone',
                           prefix: Icons.phone,
-                          onSubmit: (value) {
-                            if (formKey.currentState.validate()) {
-                              // FocusScope.of(context).unfocus();
-                              ShopRegisterCubit.get(context).userRegister(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  name: nameController.text,
-                                  phone: phoneController.text);
-                            }
-                          },
                         ),
-                        const SizedBox(height: 20.0,),
+                        SizedBox(
+                          height: 30.0,
+                        ),
                         ConditionalBuilder(
                           condition: state is! ShopRegisterLoadingState,
                           builder: (context) => defaultButton(
                             function: () {
                               if (formKey.currentState.validate()) {
-                                // FocusScope.of(context).unfocus();
                                 ShopRegisterCubit.get(context).userRegister(
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    name: nameController.text,
-                                    phone: phoneController.text);
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  phone: phoneController.text,
+                                );
                               }
                             },
-                            text: 'Register',
+                            text: 'register',
                           ),
                           fallback: (context) =>
                               Center(child: CircularProgressIndicator()),
                         ),
-                        SizedBox(
-                          height: 20.0,
+                        const SizedBox(
+                          height: 30.0,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

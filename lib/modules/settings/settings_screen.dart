@@ -17,22 +17,23 @@ class SettingsScreen extends StatelessWidget {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var model = ShopCubit.get(context).loginModel;
+        var model = ShopCubit.get(context).userModel;
 
         nameController.text = model.data.name;
         emailController.text = model.data.email;
         phoneController.text = model.data.phone;
 
-        return SingleChildScrollView(
-          child: ConditionalBuilder(
-            condition: ShopCubit.get(context).loginModel != null,
-            builder: (context) => Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: formKey,
+        return ConditionalBuilder(
+          condition: ShopCubit.get(context).userModel != null,
+          builder: (context) => Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Form(
+              key: formKey,
+              child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    if (state is ShopLoadingUpdateUserDataState)
+                  children:
+                  [
+                    if(state is ShopLoadingUpdateUserState)
                       LinearProgressIndicator(),
                     SizedBox(
                       height: 20.0,
@@ -86,8 +87,10 @@ class SettingsScreen extends StatelessWidget {
                       height: 20.0,
                     ),
                     defaultButton(
-                      function: () {
-                        if (formKey.currentState.validate()) {
+                      function: ()
+                      {
+                        if(formKey.currentState.validate())
+                        {
                           ShopCubit.get(context).updateUserData(
                             name: nameController.text,
                             phone: phoneController.text,
@@ -110,8 +113,8 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            fallback: (context) => Center(child: CircularProgressIndicator()),
           ),
+          fallback: (context) => Center(child: CircularProgressIndicator()),
         );
       },
     );

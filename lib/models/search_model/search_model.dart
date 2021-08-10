@@ -1,9 +1,11 @@
-class SearchModel {
+class SearchModel
+{
   bool status;
   Null message;
   Data data;
 
-  SearchModel.fromJson(Map<String, dynamic> json) {
+  SearchModel.fromJson(Map<String, dynamic> json)
+  {
     status = json['status'];
     message = json['message'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
@@ -56,12 +58,12 @@ class Product {
 
   Product(
       {this.id,
-      this.price,
-      this.oldPrice,
-      this.discount,
-      this.image,
-      this.name,
-      this.description});
+        this.price,
+        this.oldPrice,
+        this.discount,
+        this.image,
+        this.name,
+        this.description});
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];

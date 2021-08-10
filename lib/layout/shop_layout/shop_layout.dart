@@ -30,7 +30,7 @@ class ShopLayout extends StatelessWidget {
           body: cubit.bottomScreens[cubit.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: (int index) {
-              cubit.changeBottomNavScreens(index);
+              cubit.changeBottom(index);
             },
             items: [
               BottomNavigationBarItem(

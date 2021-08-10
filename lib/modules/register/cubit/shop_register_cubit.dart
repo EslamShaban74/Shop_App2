@@ -19,23 +19,26 @@ class ShopRegisterCubit extends Cubit<ShopRegisterStates> {
     @required String email,
     @required String password,
     @required String phone,
-  }) {
+  })
+  {
     emit(ShopRegisterLoadingState());
 
-    DioHelper.putData(
+    DioHelper.postData(
       url: REGISTER,
-      data: {
+      data:
+      {
         'name': name,
         'email': email,
         'password': password,
         'phone': phone,
       },
-    ).then((value) {
+    ).then((value)
+    {
       print(value.data);
       loginModel = ShopLoginModel.fromJson(value.data);
-
       emit(ShopRegisterSuccessState(loginModel));
-    }).catchError((error) {
+    }).catchError((error)
+    {
       print(error.toString());
       emit(ShopRegisterErrorState(error.toString()));
     });
@@ -44,10 +47,11 @@ class ShopRegisterCubit extends Cubit<ShopRegisterStates> {
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
 
-  void changePasswordVisibility() {
+  void changePasswordVisibility()
+  {
     isPassword = !isPassword;
-    suffix =
-        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    suffix = isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined ;
+
     emit(ShopRegisterChangePasswordVisibilityState());
   }
 }

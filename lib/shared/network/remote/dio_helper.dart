@@ -4,11 +4,14 @@ import 'package:flutter/cupertino.dart';
 class DioHelper {
   static Dio dio;
 
-  static init() {
-    dio = Dio(BaseOptions(
-      baseUrl: 'https://student.valuxapps.com/api/',
-      receiveDataWhenStatusError: true,
-    ));
+  static init()
+  {
+    dio = Dio(
+      BaseOptions(
+        baseUrl: 'https://student.valuxapps.com/api/',
+        receiveDataWhenStatusError: true,
+      ),
+    );
   }
 
   static Future<Response> getData({
@@ -16,12 +19,15 @@ class DioHelper {
     Map<String, dynamic> query,
     String lang = 'en',
     String token,
-  }) async {
-    dio.options.headers = {
-      'Content_Type': 'application/json',
-      'lang': lang,
-      'Authorization': token ?? '',
+  }) async
+  {
+    dio.options.headers =
+    {
+      'lang':lang,
+      'Authorization': token??'',
+      'Content-Type': 'application/json',
     };
+
     return await dio.get(
       url,
       queryParameters: query,
@@ -30,16 +36,19 @@ class DioHelper {
 
   static Future<Response> postData({
     @required String url,
-    Map<String, dynamic> query,
     @required Map<String, dynamic> data,
+    Map<String, dynamic> query,
     String lang = 'en',
     String token,
-  }) async {
-    dio.options.headers = {
-      'Content_Type': 'application/json',
-      'lang': lang,
-      'Authorization': token ?? '',
+  }) async
+  {
+    dio.options.headers =
+    {
+      'lang':lang,
+      'Authorization': token??'',
+      'Content-Type': 'application/json',
     };
+
     return dio.post(
       url,
       queryParameters: query,
@@ -49,16 +58,19 @@ class DioHelper {
 
   static Future<Response> putData({
     @required String url,
-    Map<String, dynamic> query,
     @required Map<String, dynamic> data,
+    Map<String, dynamic> query,
     String lang = 'en',
     String token,
-  }) async {
-    dio.options.headers = {
-      'Content_Type': 'application/json',
-      'lang': lang,
-      'Authorization': token ?? '',
+  }) async
+  {
+    dio.options.headers =
+    {
+      'lang':lang,
+      'Authorization': token??'',
+      'Content-Type': 'application/json',
     };
+
     return dio.put(
       url,
       queryParameters: query,

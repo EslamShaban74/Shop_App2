@@ -9,5 +9,7 @@ const GET_CATEGORIES = 'categories';
 const FAVORITES = 'favorites';
 
 const PROFILE = 'profile';
+
 const UPDATE_PROFILE = 'update-profile';
-const SEARCH = 'search';
+
+const SEARCH = 'products/search';
